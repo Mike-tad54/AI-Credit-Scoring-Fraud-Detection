@@ -1,0 +1,65 @@
+{% extends "base.html" %}{% block title %}Audit Log{% endblock %}{% block content %}
+<h5 class="fw-bold mb-3" style="color:#003366;"><i class="fa fa-scroll me-2"></i>System Audit Log — UC-14 (FR-14)</h5>
+
+<div class="card shadow-sm mb-3">
+  <div class="card-body d-flex justify-content-between align-items-center flex-wrap gap-2 py-2">
+    <div class="small text-muted">
+      Showing <strong>{{ pagination.items | length }}</strong> of <strong>{{ pagination.total }}</strong> entries
+      {% if pagination.pages > 1 %} &middot; page {{ pagination.page }} of {{ pagination.pages }}{% endif %}
+    </div>
+    {% if pagination.pages > 1 %}
+    <nav aria-label="Audit log pagination">
+      <ul class="pagination pagination-sm mb-0">
+        <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
+          <a class="page-link" href="{{ url_for('admin.audit', page=pagination.page-1) if pagination.has_prev else '#' }}">&laquo; Prev</a>
+        </li>
+        {% for p in range(1, pagination.pages + 1) %}
+          {% if p == pagination.page %}
+            <li class="page-item active"><span class="page-link">{{ p }}</span></li>
+          {% elif p <= 3 or p > pagination.pages - 2 or (p >= pagination.page - 1 and p <= pagination.page + 1) %}
+            <li class="page-item"><a class="page-link" href="{{ url_for('admin.audit', page=p) }}">{{ p }}</a></li>
+          {% elif p == 4 or p == pagination.pages - 2 %}
+            <li class="page-item disabled"><span class="page-link">&hellip;</span></li>
+          {% endif %}
+        {% endfor %}
+        <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
+          <a class="page-link" href="{{ url_for('admin.audit', page=pagination.page+1) if pagination.has_next else '#' }}">Next &raquo;</a>
+        </li>
+      </ul>
+    </nav>
+    {% endif %}
+  </div>
+</div>
+
+<div class="card shadow-sm"><div class="card-body p-0" style="max-height:600px;overflow-y:auto;">
+  <table class="table table-sm table-hover mb-0">
+    <thead class="sticky-top" style="background:#003366;color:#fff;">
+      <tr><th>#</th><th>Timestamp</th><th>User</th><th>Action</th><th>Entity</th><th>IP</th><th>Details</th></tr>
+    </thead>
+    <tbody>
+    {% for l in logs %}<tr>
+      <td>{{ l.log_id }}</td>
+      <td class="small">{{ l.timestamp.strftime('%d %b %Y %H:%M:%S') }}</td>
+      <td class="small">{{ l.user.username if l.user else "System" }}</td>
+      <td><span class="badge {% if 'FRAUD' in l.action %}bg-danger{% elif 'CREDIT' in l.action %}bg-primary{% elif 'LOGIN' in l.action %}bg-success{% elif 'REGISTERED' in l.action %}bg-info text-dark{% elif 'TOGGLE' in l.action or 'CREATED' in l.action %}bg-warning text-dark{% else %}bg-secondary{% endif %}">{{ l.action }}</span></td>
+      <td class="small">{{ l.entity or "—" }} {% if l.entity_id %}#{{ l.entity_id }}{% endif %}</td>
+      <td class="small text-muted">{{ l.ip_address or "—" }}</td>
+      <td class="small">
+        {% if l.details %}
+          {% set det = l.details | from_json %}
+          {% if det %}
+            {% for k, v in det.items() %}
+              <span class="badge bg-light text-dark me-1 mb-1" style="font-size:0.65rem;border:1px solid #dee2e6;">{{ k }}: {{ v }}</span>
+            {% endfor %}
+          {% else %}
+            <span class="text-muted">—</span>
+          {% endif %}
+        {% else %}
+          <span class="text-muted">—</span>
+        {% endif %}
+      </td>
+    </tr>{% endfor %}
+    </tbody>
+  </table>
+</div></div>
+{% endblock %}

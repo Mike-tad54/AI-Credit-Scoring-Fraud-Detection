@@ -1,0 +1,19 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Credit &amp; Fraud System | Unity University</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head><body style="background:linear-gradient(135deg,#003366,#1F5C99 60%,#2E75B6);min-height:100vh;">
+<div class="container py-5">
+  <div class="text-center text-white mb-5"><i class="fa fa-brain fa-4x mb-3 opacity-90"></i>
+    <h1 class="fw-bold display-5">AI Credit Scoring &amp; Fraud Detection</h1>
+    <p class="lead opacity-75">Unity University &nbsp;|&nbsp; Department of Computer Science &nbsp;|&nbsp; Final Project 2025/2026</p>
+    <a href="{{ url_for('auth.login') }}" class="btn btn-lg btn-light fw-bold px-5 mt-2" style="color:#003366;border-radius:50px;"><i class="fa fa-right-to-bracket me-2"></i>Get Started</a>
+  </div>
+  <div class="row g-4 justify-content-center">
+    {% for icon,title,desc,color in [("fa-file-invoice-dollar","Credit Scoring (UC-01–07)","AI-powered creditworthiness assessment (XGBoost/RF). Instant scores with SHAP explanations. 14 use cases implemented.","#1E7B34"),("fa-shield-halved","Fraud Detection (UC-08–11)","Ensemble ML detects fraudulent transactions. Probability scores, SHAP explanations, CSV export.","#C00000"),("fa-gauge","Admin Panel (UC-12–14)","Dashboard analytics, user management, ML model monitoring, full audit log.","#003366")] %}
+    <div class="col-md-4"><div class="card h-100 shadow border-0" style="border-radius:16px;"><div class="card-body text-center p-4"><i class="fa {{ icon }} fa-3x mb-3" style="color:{{ color }};"></i><h5 class="fw-bold">{{ title }}</h5><p class="text-muted small">{{ desc }}</p></div></div></div>
+    {% endfor %}
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body></html>
