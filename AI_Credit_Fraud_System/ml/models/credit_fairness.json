@@ -1,0 +1,18 @@
+{
+  "gender": {
+    "Male": 0.0524,
+    "Female": 0.0559,
+    "dpd": 0.0036,
+    "pass": true
+  },
+  "employment_type": {
+    "Unemployed": 0.0461,
+    "Self-Employed": 0.0539,
+    "Employed": 0.0632,
+    "dpd": 0.0171,
+    "pass": true
+  },
+  "threshold": 0.1,
+  "dataset": "held-out test set (20%)",
+  "intervention": "reweighing (Kamiran & Calders 2012)"
+}

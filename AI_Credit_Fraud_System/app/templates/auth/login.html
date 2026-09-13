@@ -1,0 +1,37 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Login | AI System</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}">
+</head><body style="background:linear-gradient(135deg,#003366,#1F5C99);min-height:100vh;">
+<div class="d-flex align-items-center justify-content-center min-vh-100">
+  <div class="card shadow-lg" style="width:420px;border-radius:16px;border:none;">
+    <div class="card-body p-5">
+      <div class="text-center mb-4"><i class="fa fa-brain fa-3x mb-2" style="color:#003366;"></i>
+        <h4 class="fw-bold" style="color:#003366;">AI Credit &amp; Fraud System</h4>
+        <p class="text-muted small">Unity University — Department of Computer Science</p></div>
+      {% with messages=get_flashed_messages(with_categories=true) %}{% for cat,msg in messages %}
+        <div class="alert alert-{{ cat }} py-2 small">{{ msg }}</div>{% endfor %}{% endwith %}
+      <form method="POST">
+        <div class="mb-3"><label class="form-label fw-semibold">Username</label>
+          <div class="input-group"><span class="input-group-text"><i class="fa fa-user"></i></span>
+            <input type="text" name="username" class="form-control" placeholder="Enter username" required autofocus></div></div>
+        <div class="mb-4"><label class="form-label fw-semibold">Password</label>
+          <div class="input-group"><span class="input-group-text"><i class="fa fa-lock"></i></span>
+            <input type="password" name="password" id="pwd" class="form-control" placeholder="Enter password" required>
+            <button class="btn btn-outline-secondary" type="button" onclick="togglePwd()"><i class="fa fa-eye" id="eyeIcon"></i></button></div></div>
+        <button type="submit" class="btn btn-primary w-100 py-2 fw-bold" style="background:#003366;border-color:#003366;">
+          <i class="fa fa-right-to-bracket me-2"></i>Log In</button>
+      </form>
+      <hr class="my-3">
+      <div class="bg-light rounded p-3 small"><strong>Demo Credentials:</strong><br>
+        <span class="badge" style="background:#003366;">Admin</span> admin / Admin@2025<br>
+        <span class="badge" style="background:#1E7B34;">Officer</span> officer1 / Officer@2025<br>
+        <span class="badge" style="background:#2E75B6;">Applicant</span> selam / Selam@2025</div>
+      <div class="text-center mt-3"><a href="{{ url_for('auth.register') }}" class="text-decoration-none small">New applicant? Create account</a></div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>function togglePwd(){const p=document.getElementById('pwd'),e=document.getElementById('eyeIcon');p.type=p.type==='password'?'text':'password';e.className=p.type==='password'?'fa fa-eye':'fa fa-eye-slash';}</script>
+</body></html>
