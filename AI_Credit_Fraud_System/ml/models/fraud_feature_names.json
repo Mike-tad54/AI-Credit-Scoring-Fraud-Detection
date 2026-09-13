@@ -1,1 +1,0 @@
-["amount", "hour_of_day", "is_weekend", "txn_type_TRANSFER", "txn_type_PAYMENT", "txn_type_CASH_OUT", "txn_type_DEBIT", "txn_type_CASH_IN", "is_round_amount", "log_amount"]

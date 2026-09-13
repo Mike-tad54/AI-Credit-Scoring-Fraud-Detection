@@ -1,9 +1,0 @@
-{
-  "model_name": "XGBoost",
-  "roc_auc": 0.8522893727678205,
-  "f1_score": 0.8829953198127926,
-  "accuracy": 0.8125,
-  "version": "v2.0",
-  "n_features": 11,
-  "fairness_intervention": "reweighing (Kamiran & Calders 2012)"
-}
